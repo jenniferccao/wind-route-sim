@@ -125,6 +125,7 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
                             borderRadius: '6px',
                             padding: '4px 10px', // slightly tighter padding
                             fontSize: '12px',
+                            fontFamily: '"Avenir", "Avenir Next", "Segoe UI", sans-serif',
                             fontWeight: 600,
                             cursor: loading ? 'not-allowed' : 'pointer',
                             display: 'flex',

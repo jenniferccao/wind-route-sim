@@ -87,6 +87,7 @@ export default function SettingsPanel({
                             padding: '6px',
                             fontSize: '12px',
                             fontWeight: 600,
+                            fontFamily: '"Avenir", "Avenir Next", "Segoe UI", sans-serif',
                             cursor: 'pointer',
                             transition: 'all 0.2s',
                         }}
@@ -104,6 +105,7 @@ export default function SettingsPanel({
                             padding: '6px',
                             fontSize: '12px',
                             fontWeight: 600,
+                            fontFamily: '"Avenir", "Avenir Next", "Segoe UI", sans-serif',
                             cursor: 'pointer',
                             transition: 'all 0.2s',
                         }}
