@@ -6,6 +6,8 @@
  */
 
 
+import { handleOpenMeteoResponse } from '../utils/openMeteo';
+
 export interface ArrowWindEntry {
     speed_kmh: number;
     direction_deg: number;
@@ -44,10 +46,7 @@ export async function loadArrowPoint(lat: number, lng: number, date: string): Pr
         `&timezone=auto&wind_speed_unit=kmh`;
 
     const p = fetch(url)
-        .then((r) => {
-            if (!r.ok) throw new Error(`HTTP ${r.status}`);
-            return r.json();
-        })
+        .then(handleOpenMeteoResponse)
         .then((json) => {
             const times: string[] = json.hourly.time;
             const speeds: number[] = json.hourly.windspeed_10m;

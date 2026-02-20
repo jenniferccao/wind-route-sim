@@ -9,13 +9,15 @@ interface Props {
     setElevationOn: (v: boolean) => void;
     mapStyle: 'satellite' | 'streets';
     setMapStyle: (s: 'satellite' | 'streets') => void;
+    windRateLimited?: boolean;
 }
 
 export default function SettingsPanel({
     terrainOn, setTerrainOn,
     windOn, setWindOn,
     elevationOn, setElevationOn,
-    mapStyle, setMapStyle
+    mapStyle, setMapStyle,
+    windRateLimited
 }: Props) {
     const [expanded, setExpanded] = useState(false);
 
@@ -122,7 +124,7 @@ export default function SettingsPanel({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {/* Use simple row toggles for now, preserving logic */}
                     <ToggleItem label="3D Terrain" active={terrainOn} onClick={() => setTerrainOn(!terrainOn)} accent={accentColor} />
-                    <ToggleItem label="Wind" active={windOn} onClick={() => setWindOn(!windOn)} accent={accentColor} />
+                    <ToggleItem label="Wind" active={windOn} onClick={() => setWindOn(!windOn)} accent={accentColor} disabled={windRateLimited} tooltip={windRateLimited ? "Temporarily unavailable - Rate limit reached" : undefined} />
                     <ToggleItem label="Elevation" active={elevationOn} onClick={() => setElevationOn(!elevationOn)} accent={accentColor} />
                 </div>
             </div>
@@ -130,16 +132,18 @@ export default function SettingsPanel({
     );
 }
 
-function ToggleItem({ label, active, onClick, accent }: { label: string, active: boolean, onClick: () => void, accent: string }) {
+function ToggleItem({ label, active, onClick, accent, disabled, tooltip }: { label: string, active: boolean, onClick: () => void, accent: string, disabled?: boolean, tooltip?: string }) {
     return (
         <div
-            onClick={onClick}
+            onClick={disabled ? undefined : onClick}
+            title={tooltip}
             style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                cursor: 'pointer',
+                cursor: disabled ? 'not-allowed' : 'pointer',
                 padding: '4px 0',
+                opacity: disabled ? 0.5 : 1,
             }}
         >
             <span style={{ fontSize: '13px', color: active ? '#fff' : '#9ca3af', fontWeight: active ? 500 : 400, transition: 'color 0.2s' }}>

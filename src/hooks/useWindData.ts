@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { handleOpenMeteoResponse } from '../utils/openMeteo';
 
 export interface HourlyWindEntry {
   time: string;
@@ -49,10 +50,7 @@ export async function fetchWindForPoint(lat: number, lon: number, date: string):
   console.log(`[WindFetch] Fetching NEW for key: ${key}`);
 
   const p = fetch(buildUrl(lat, lon, date))
-    .then((r) => {
-      if (!r.ok) throw new Error(`Open-Meteo HTTP ${r.status}`);
-      return r.json();
-    })
+    .then(handleOpenMeteoResponse)
     .then((json) => {
       const times: string[] = json.hourly.time;
       const speeds: number[] = json.hourly.windspeed_10m;
@@ -175,7 +173,9 @@ export function useMultiPointWindData(points: { lat: number; lon: number }[], da
     // The wrapper handles errors by returning null for failed points
     const fetchSafe = (p: { lat: number; lon: number }) =>
       fetchWindForPoint(p.lat, p.lon, date).catch((err) => {
-        console.warn(`Failed to fetch wind for ${p.lat},${p.lon}:`, err);
+        if (!String(err).toLowerCase().includes('limit')) {
+          console.warn(`Failed to fetch wind for ${p.lat},${p.lon}:`, err);
+        }
         return null;
       });
 

@@ -277,8 +277,21 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [terrainOn, setTerrainOn] = useState(true);
   const [windOn, setWindOn] = useState(true);
+  const [windRateLimited, setWindRateLimited] = useState(false);
   const [elevationOn, setElevationOn] = useState(true);
   const [mapReady, setMapReady] = useState(false);
+
+  useEffect(() => {
+    const handleRateLimit = (e: Event) => {
+      const isLimited = (e as CustomEvent).detail;
+      setWindRateLimited(isLimited);
+      if (isLimited) {
+        setWindOn(false);
+      }
+    };
+    window.addEventListener('wind-rate-limit', handleRateLimit);
+    return () => window.removeEventListener('wind-rate-limit', handleRateLimit);
+  }, []);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Start/Finish markers
@@ -950,6 +963,7 @@ function App() {
         setElevationOn={setElevationOn}
         mapStyle={mapStyle}
         setMapStyle={handleSetMapStyle}
+        windRateLimited={windRateLimited}
       />
 
       {/* ─── Top-Right: Upload Panel ─── */}
