@@ -29,12 +29,8 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
 
     return (
         <div
+            className="time-slider-panel"
             style={{
-                position: 'absolute',
-                bottom: '24px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                zIndex: 10,
                 background: 'rgba(10, 12, 22, 0.8)',
                 backdropFilter: 'blur(14px)',
                 border: '1px solid rgba(255,255,255,0.1)',
@@ -42,16 +38,14 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
                 padding: '14px 24px 12px',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.45)',
                 color: '#e2e8f0',
-                minWidth: '340px',
-                width: 'min(500px, calc(100vw - 40px))',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px'
             }}
         >
             {/* Header row: Date Picker & Status */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="time-slider-header">
+                <div className="time-slider-controls">
                     <div
                         style={{ position: 'relative', display: 'flex', alignItems: 'center', cursor: 'pointer' }}
                         onClick={() => {
@@ -89,9 +83,10 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
                             fontSize: '13px',
                             fontWeight: 600,
                             padding: '4px 8px 4px 28px', // Extra left padding for icon
-                            width: '110px',
+                            width: '95px', // slightly smaller width to fit better
                             textAlign: 'center',
-                            display: 'block'
+                            display: 'block',
+                            letterSpacing: '-0.02em',
                         }}>
                             {(() => {
                                 if (!date) return 'MM-DD-YYYY';
@@ -128,7 +123,7 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
                             color: loading ? '#94a3b8' : '#000000',
                             border: 'none',
                             borderRadius: '6px',
-                            padding: '4px 12px',
+                            padding: '4px 10px', // slightly tighter padding
                             fontSize: '12px',
                             fontWeight: 600,
                             cursor: loading ? 'not-allowed' : 'pointer',
@@ -143,13 +138,14 @@ export default function DateTimeControl({ date, setDate, onCommitDate, hourlyDat
                     </button>
                 </div>
 
-                <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.08em' }}>
-                    Forecast
-                </span>
-
-                <span style={{ fontSize: '12px', color: '#9BDD4A', fontWeight: 700 }}>
-                    {getTimeLabel(hourIndex)}
-                </span>
+                <div className="time-slider-forecast">
+                    <span style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
+                        Forecast
+                    </span>
+                    <span style={{ fontSize: '12px', color: '#9BDD4A', fontWeight: 700 }}>
+                        {getTimeLabel(hourIndex)}
+                    </span>
+                </div>
             </div>
 
             {/* Slider track */}

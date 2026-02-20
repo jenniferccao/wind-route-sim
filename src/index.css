@@ -21,3 +21,130 @@ body,
   overflow: hidden;
   position: relative;
 }
+
+/* Responsive UI Panels */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.settings-panel {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.upload-panel {
+  position: absolute;
+  bottom: 40px;
+  left: 24px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.time-slider-panel {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  min-width: 340px;
+  width: min(500px, calc(100vw - 40px));
+}
+
+.legend-panel {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  min-width: 180px;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .logo {
+    top: 16px;
+    right: 16px;
+    left: auto;
+    transform: none;
+    width: 48px;
+  }
+
+  .settings-panel {
+    top: 16px;
+    left: 16px;
+  }
+
+  .time-slider-panel {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    width: auto;
+    min-width: 0;
+  }
+
+  .upload-panel {
+    bottom: 180px;
+    left: 16px;
+  }
+
+  .time-slider-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .time-slider-forecast {
+    align-self: flex-start;
+  }
+
+  .time-slider-panel {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    width: auto;
+    min-width: 0;
+    padding: 14px 12px 12px 12px;
+    /* Reduce horizontal padding to fit elements */
+  }
+
+  .legend-panel {
+    display: none;
+  }
+}
+
+.time-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.time-slider-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-slider-forecast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

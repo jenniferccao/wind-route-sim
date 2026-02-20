@@ -974,14 +974,14 @@ function App() {
 
       {/* ─── Legend (bottom-right) ─── */}
       <div
+        className="legend-panel"
         style={{
-          position: 'absolute', bottom: '24px', right: '24px', zIndex: 10,
           background: 'rgba(15, 15, 25, 0.8)',
           backdropFilter: 'blur(10px)',
           border: '1px solid rgba(255,255,255,0.12)',
           borderRadius: '12px', padding: '16px',
           boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
-          color: '#e2e8f0', minWidth: '200px',
+          color: '#e2e8f0',
         }}
       >
         <h4 style={{ margin: '0 0 4px 0', fontSize: '14px', fontWeight: 600 }}>Relative Difficulty</h4>

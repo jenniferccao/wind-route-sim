@@ -23,18 +23,7 @@ export default function SettingsPanel({
     const accentColor = '#9BDD4A';
 
     return (
-        <div
-            style={{
-                position: 'absolute',
-                left: '24px',
-                top: '24px',
-                zIndex: 20,
-                display: 'flex',
-                flexDirection: 'column', // Expands downward
-                alignItems: 'flex-start',
-                gap: '12px',
-            }}
-        >
+        <div className="settings-panel">
             {/* Toggle Button */}
             <button
                 onClick={() => setExpanded(!expanded)}

@@ -23,18 +23,7 @@ const UploadPanel: React.FC<Props> = ({
     const accentColor = '#9BDD4A';
 
     return (
-        <div
-            style={{
-                position: 'absolute',
-                bottom: '40px',
-                left: '24px',
-                zIndex: 20,
-                display: 'flex',
-                flexDirection: 'column-reverse',
-                alignItems: 'flex-start',
-                gap: '8px',
-            }}
-        >
+        <div className="upload-panel">
             {/* Main Upload Button + Recenter side-by-side */}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <button
