@@ -1,6 +1,6 @@
 <p align="center">
 <img width="80%" alt="preride_cover" src="https://github.com/user-attachments/assets/94704157-7bc1-491e-83a4-92a01a2af1b6" />
-<\p>
+
   
 Have you ever ridden a hill in a headwind and wished you knew ahead of time to properly plan your energy? PreRide is a simple web app that visualizes the relative difficulty of a route based on wind effect and elevation.
 
@@ -11,6 +11,7 @@ Have you ever ridden a hill in a headwind and wished you knew ahead of time to p
 - 3D terrain view toggle
 - Upload custom routes
 - Time slider to animate wind data
+
 
 <p align="center">
 <img width="80%" alt="Screenshot 2026-02-19 at 9 32 45 PM" src="https://github.com/user-attachments/assets/594c779c-8c8f-4717-840b-991490dc81fb" />
