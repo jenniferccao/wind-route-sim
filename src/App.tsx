@@ -216,17 +216,15 @@ function buildSegmentCollection(
       const distM = haversineMeters(lat1, lng1, lat2, lng2);
       if (distM > 0.1) { // ignore micro-segments
         const rawGrade = (elevations[i + 1] - elevations[i]) / distM;
-        const g = Math.max(-GRADE_CLAMP, Math.min(GRADE_CLAMP, rawGrade));
-        if (g > 0) {
-          grade = g;
-          climbPenalty = CLIMB_K * grade;
-        } else {
-          grade = g;
-        }
+        grade = Math.max(-GRADE_CLAMP, Math.min(GRADE_CLAMP, rawGrade));
+        climbPenalty = CLIMB_K * grade;
       }
     }
 
-    const sufferRaw = (includeWind ? headwindRaw : 0) + climbPenalty;
+    const BASE_SUFFER = 25;
+    const WIND_WEIGHT = 2.0;
+    const windPenalty = includeWind ? headwindRaw * WIND_WEIGHT : 0;
+    const sufferRaw = Math.max(0, BASE_SUFFER + windPenalty + climbPenalty);
 
     // Detect if this segment is a return pass of a bidirectional edge
     const edgeKey = getEdgeKey(coords[i], coords[i + 1]);
@@ -252,7 +250,7 @@ function buildSegmentCollection(
 
   // ── Normalise scores to 0..1 ──────────────────────────────────────────────
   const raws = segmentData.map(s => s.sufferRaw);
-  const maxRaw = Math.max(...raws, 1e-6);
+  const maxRaw = Math.max(...raws, 100);
 
   const features: GeoJSON.Feature<GeoJSON.LineString>[] = segmentData.map((seg) => ({
     type: 'Feature',

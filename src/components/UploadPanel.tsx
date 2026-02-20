@@ -25,7 +25,7 @@ const UploadPanel: React.FC<Props> = ({
     return (
         <div className="upload-panel">
             {/* Main Upload Button + Recenter side-by-side */}
-            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', pointerEvents: 'auto' }}>
                 <button
                     onClick={() => setExpanded(!expanded)}
                     style={{
