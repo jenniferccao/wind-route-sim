@@ -286,6 +286,16 @@ function App() {
   const [appReady, setAppReady] = useState(false);
   const [hideLoadingScreen, setHideLoadingScreen] = useState(false);
 
+  // Onboarding state
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // Lazily initialize onboarding state once on mount
+  useEffect(() => {
+    if (localStorage.getItem('preride_onboarding_seen') !== 'true') {
+      setShowOnboarding(true);
+    }
+  }, []);
+
   useEffect(() => {
     const handleRateLimit = (e: Event) => {
       const isLimited = (e as CustomEvent).detail;
@@ -1056,10 +1066,11 @@ function App() {
       </div>
 
       {/* ONBOARDING OVERLAY */}
-      {appReady && (
+      {appReady && showOnboarding && (
         <OnboardingOverlay
           onDismiss={() => {
             localStorage.setItem('preride_onboarding_seen', 'true');
+            setShowOnboarding(false);
           }}
         />
       )}
