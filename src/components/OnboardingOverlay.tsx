@@ -95,7 +95,7 @@ export default function OnboardingOverlay({ onDismiss }: OnboardingOverlayProps)
                         Upload your own GPX or explore the sample route
                     </p>
                     <p style={{ margin: 0 }}>
-                        Relative difficulty of each segment is calculated using upcoming elevation grades and headwind severity.
+                        Relative difficulty of each segment is calculated using upcoming elevation grades and wind info
                     </p>
                     <p style={{ margin: 0 }}>
                         Use the time slider to forecast conditions for your specific planned ride time
